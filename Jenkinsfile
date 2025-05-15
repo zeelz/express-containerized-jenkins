@@ -1,5 +1,5 @@
 node {
-    stage () {
+    stage ("try jenkinsfile") {
         echo "jenkinfile"
         ls -l
     }
