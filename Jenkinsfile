@@ -3,6 +3,7 @@ node {
         agent {
             docker {
                 image "node:20-alpine"
+                // agent not working yet
             }
         }
         git branch: "main", url: "https://github.com/zeelz/jenkins.git"
