@@ -1,7 +1,7 @@
 node {
     stage ("try jenkinsfile") {
         git branch: "main", url: "https://github.com/zeelz/jenkins.git"
-        echo "jenkinfile"
+        echo "jenkinfile ${BUILD_ID}"
         sh "ls -l"
     }
 }
