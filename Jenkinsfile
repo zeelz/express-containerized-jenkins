@@ -1,14 +1,10 @@
 node {
     stage ("try jenkinsfile") {
-        agent {
-            docker {
-                image "node:20-alpine"
-                // agent not working yet
-            }
+        docker.image("node:20-alpine").inside {        
+            git branch: "main", url: "https://github.com/zeelz/jenkins.git"
+            echo "BUILD_ID is ${BUILD_ID}"
+            // sh "node -v"
+            sh "ls -l"
         }
-        git branch: "main", url: "https://github.com/zeelz/jenkins.git"
-        echo "BUILD_ID is ${BUILD_ID}"
-        // sh "node -v"
-        sh "ls -l"
     }
 }
