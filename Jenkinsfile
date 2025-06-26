@@ -17,6 +17,12 @@ pipeline {
               sh 'npm install'
             }
         }
+
+        stage('Build image'){
+            script {
+                'docker.build("express-app"+"$BUILD_NUMBER")'
+            }
+        }
     }
 
     post {
