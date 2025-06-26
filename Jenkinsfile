@@ -19,8 +19,10 @@ pipeline {
         }
 
         stage('Build image'){
-            script {
-                'docker.build("express-app"+"$BUILD_NUMBER")'
+            steps {                
+                script {
+                    'docker.build("express-app"+"$BUILD_NUMBER")'
+                }
             }
         }
     }
