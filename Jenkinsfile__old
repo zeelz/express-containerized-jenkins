@@ -10,5 +10,6 @@ node {
         echo "BUILD_ID is ${BUILD_ID}"
         // sh "node -v"
         sh "ls -l"
+        sh "npm install"
     }
 }
