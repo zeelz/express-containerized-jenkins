@@ -2,7 +2,7 @@ node {
     stage ("try jenkinsfile") {
         agent {
             docker {
-                image "node:20-alpine"
+                image "node:alpine"
             }
         }
             
