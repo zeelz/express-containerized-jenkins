@@ -22,6 +22,7 @@ pipeline {
             steps {                
                 script {
                     'docker.build("express-app"+"$BUILD_NUMBER")'
+                    sh 'docker --version'
                 }
             }
         }
