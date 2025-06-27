@@ -1,21 +1,19 @@
 pipeline {
 
-  agent any
-  tools {
-    nodejs 'NodeJS'
+  agent {
+    docker {
+      image "node:20-alpine"
+    }
   }
 
   stages {
     stage ("try jenkinsfile") {
-        // agent { docker { image "node:20-alpine"
-
       steps {            
           git branch: "main", url: "https://github.com/zeelz/jenkins.git"
           echo "BUILD_ID is ${BUILD_ID}"
           sh "node -v"
           sh "ls -l"
           sh "npm install"
-          sh "docker --version"
       }
     }
   }
