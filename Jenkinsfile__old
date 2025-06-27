@@ -2,13 +2,13 @@ node {
     stage ("try jenkinsfile") {
         agent {
             docker {
-                image "node:alpine"
+                image "docker:latest"
             }
         }
             
         git branch: "main", url: "https://github.com/zeelz/jenkins.git"
         echo "BUILD_ID is ${BUILD_ID}"
-        sh "node -v"
+        sh "docker --version"
         sh "ls -l"
         // sh "npm install"
     }
