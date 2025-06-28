@@ -36,7 +36,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         sh 'echo ${PASS} | docker login -u ${USER} --password-stdin'
                         // sh 'docker push ${USER}/express-containerized:v"$BUILD_NUMBER"'
-                        sh IMAGE.push(${USER}/express-containerized:v"$BUILD_NUMBER")
+                        sh IMAGE.push("${USER}/express-containerized:v${BUILD_NUMBER}")
                     }                    
                 }
             }
