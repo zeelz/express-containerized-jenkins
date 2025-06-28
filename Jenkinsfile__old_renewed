@@ -6,7 +6,7 @@ pipeline {
     stage ("try jenkinsfile") {
       steps {            
           git branch: "main", url: "https://github.com/zeelz/jenkins.git"
-          docker run node:alpine
+          sh 'docker run node:alpine'
           echo "BUILD_ID is ${BUILD_ID}"
           sh "node -v"
           sh "ls -l"
