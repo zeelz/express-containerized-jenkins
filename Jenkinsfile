@@ -26,8 +26,8 @@ pipeline {
         stage('Build image'){
             steps {                
                 script {
-                    'echo hello'
-                   // IMAGE = 'docker.build("express-containerized:v"+"$BUILD_NUMBER")'
+                   //'docker.build("express-containerized:v"+"$BUILD_NUMBER")'
+                   'docker build -t express-containerized:v${BUILD_NUMBER} .'
                 }
             }
         }
@@ -37,7 +37,7 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         sh 'echo ${PASS} | docker login -u ${USER} --password-stdin'
-                        sh 'docker build -t ${USER}/express-containerized:v${BUILD_NUMBER} .'
+                        sh 'docker tag express-containerized:v${BUILD_NUMBER} ${USER}/express-containerized:v${BUILD_NUMBER}'
                         sh 'docker push ${USER}/express-containerized:v${BUILD_NUMBER}'
                         // sh IMAGE.push("${USER}/express-containerized:v${BUILD_NUMBER}")
                     }                    
@@ -48,11 +48,11 @@ pipeline {
 
     post {
         success {
-            echo 'Build completed successfully.'
+            echo 'Build and push completed successfully.'
         }
 
         failure {
-            echo 'Build failed. Check logs.'
+            echo 'Build or push failed. Check logs.'
         }
     }
 }
