@@ -14,15 +14,12 @@ services:
 
   backend:
     container_name: backend
-    build: 
-      dockerfile: Dockerfile
-      context: .
+    image: zeelz/express-containerized:v28
     env_file:
       - .env
     environment:
       - DB_HOST=db # override DB_HOST
       - DB_PORT=5432 # just incase DB_PORT is different from 5432
-      # host can access db on any DB_PORT but backend must use 5432
     ports:
       - ${PORT}:${PORT}
     depends_on:

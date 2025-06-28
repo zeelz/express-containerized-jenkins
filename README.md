@@ -1,7 +1,10 @@
-# Simple Express API image
+# Express Containerized
 
+### Jenkins setup
+This repo is connected to a jenkins pipeline 
+when triggered checkouts, builds and pushes image to docker hub
 
-### Capabilities
+### Running options
 
 0. For each option below set up db
 
@@ -59,22 +62,14 @@ express-containerized
 ## 2b. Build and run app as a container with compose
 - docker compose up --build
 - 2 containers (db & api) would be running with an entryfile to automatically create `users` table
-- if db table wasn't created exec into db, run psql and create table
+- if db table wasn't created exec into db, run psql and create table (sql command in entryfile)
+- psql -U postgres -p 5433 -d postgres -h localhost
 
-## 3. PULL REMOTE IMAGE
+## 3. Pull and run remote image
 
-[https://hub.docker.com/r/zeelz/simple-express-app](https://hub.docker.com/r/zeelz/simple-express-app)
+[https://hub.docker.com/repository/docker/zeelz/express-containerized](https://hub.docker.com/repository/docker/zeelz/express-containerized)
 
+- only need docker-compose.pull.yaml and .env
 ```
-docker run -d
--p [HOST_PORT]:[CONTAINER_PORT] \
--e PORT=[CONTAINER_PORT] \
---platform linux/amd64 \
-zeelz/simple-express-app
+docker compose -f docker-compose.pull.yaml up
 ```
-
-Change `HOST_PORT` and `CONTAINER_PORT` to your desired ports
-
-**Example**
-
-`docker run -d -p 3000:3000 -e "PORT=3000" --platform linux/amd64 zeelz/simple-express-app`
