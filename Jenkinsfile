@@ -26,8 +26,10 @@ pipeline {
         stage('Build image'){
             steps {                
                 script {
-                   //'docker.build("express-containerized:v"+"$BUILD_NUMBER")'
-                   'docker build -t express-containerized:v${BUILD_NUMBER} .'
+                    withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                       //'docker.build("express-containerized:v"+"$BUILD_NUMBER")'
+                       sh 'docker build -t ${USER}/express-containerized:v${BUILD_NUMBER} .'                        
+                    }
                 }
             }
         }
@@ -37,7 +39,6 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         sh 'echo ${PASS} | docker login -u ${USER} --password-stdin'
-                        sh 'docker tag express-containerized:v${BUILD_NUMBER} ${USER}/express-containerized:v${BUILD_NUMBER}'
                         sh 'docker push ${USER}/express-containerized:v${BUILD_NUMBER}'
                         // sh IMAGE.push("${USER}/express-containerized:v${BUILD_NUMBER}")
                     }                    
