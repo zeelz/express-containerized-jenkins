@@ -25,7 +25,7 @@ pipeline {
         stage('Build image'){
             steps {                
                 script {
-                    sh 'echo hello'
+                    'echo hello'
                    // IMAGE = 'docker.build("express-containerized:v"+"$BUILD_NUMBER")'
                 }
             }
