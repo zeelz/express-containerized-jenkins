@@ -1,11 +1,6 @@
 node {
     stage ("try jenkinsfile") {
-        agent {            
-            docker { 
-                image "node:alpine"
-            }
-        }
-
+        docker node:alpine
         git branch: "main", url: "https://github.com/zeelz/jenkins.git"
         echo "BUILD_ID is ${BUILD_ID}"
         sh "ls -l"
