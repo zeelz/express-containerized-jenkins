@@ -21,7 +21,18 @@ pipeline {
         stage('Build image'){
             steps {                
                 script {
-                    'docker.build("express-app"+"$BUILD_NUMBER")'
+                    sh 'docker.build("express-containerized"+"$BUILD_NUMBER")'
+                }
+            }
+        }
+
+        stage('Push Image'){
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                        sh 'echo ${PASS} | docker login -u ${USER} --password-stdin'
+                        sh 'docker push ${USER}/express-containerized+"$BUILD_NUMBER"'
+                    }                    
                 }
             }
         }
