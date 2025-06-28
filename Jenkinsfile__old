@@ -1,6 +1,6 @@
 node {
     stage ("try jenkinsfile") {
-        docker node:alpine
+        docker run node:alpine
         git branch: "main", url: "https://github.com/zeelz/jenkins.git"
         echo "BUILD_ID is ${BUILD_ID}"
         sh "ls -l"
