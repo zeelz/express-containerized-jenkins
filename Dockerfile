@@ -4,7 +4,7 @@ WORKDIR /express-app
 
 COPY package.json .
 
-RUN npm ci
+RUN npm install
 
 COPY . .
 
