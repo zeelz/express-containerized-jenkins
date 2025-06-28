@@ -18,7 +18,8 @@ pipeline {
 
         stage('Install node deps'){
             steps {
-              sh 'npm install'
+                sh 'echo hello'
+              // sh 'npm install'
             }
         }
 
